@@ -10,7 +10,7 @@
 #include "wave_file.h"  
 
 
-S16_T refbuf[FRAME_SIZE];
+//S16_T refbuf[FRAME_SIZE];
 S16_T inputbuf[FRAME_SIZE], outputbuf[FRAME_SIZE];
 S16_T bufferlen;
 int frmNo = 1;
