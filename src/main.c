@@ -139,6 +139,7 @@ int main(int argc, char* argv[])
 			fwrite(Out_x_block_supp, sizeof(S16_T), bufferlen, fp_out);
 			printf("frame Number is %d\r", (i + 1));
 			frmNo++;
+			NULL;
 		}
 	}
 	//if (samplerate==8000)
