@@ -13,21 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{af62386c-2db5-40ce-b5bb-af0082c4e1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="wave">
+      <UniqueIdentifier>{b3386ae0-db6a-4914-9eeb-83971aea95a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linear_3Mic_manage">
+      <UniqueIdentifier>{12e99f2a-fe5c-4f51-918c-e2450a68ff21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stft">
+      <UniqueIdentifier>{45698b10-5b0b-4acb-b2e1-2f9c86c0248c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="noise_process">
+      <UniqueIdentifier>{e666c547-6b4a-4d02-a60f-cc2a5560ecda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file_test">
+      <UniqueIdentifier>{af493e1e-f9b6-4944-abc9-510d8c421030}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\common\common_type.c">
+      <Filter>common</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\wav\wave_file.c">
-      <Filter>源文件</Filter>
+      <Filter>wave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\linear_3Mic_manage\linear_3Mic_manage.c">
+      <Filter>linear_3Mic_manage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\stft.c">
+      <Filter>stft</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\noise_estimate.c">
+      <Filter>noise_process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\noise_suppression.c">
+      <Filter>noise_process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\sqrt_hamming.c">
+      <Filter>stft</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\ns_init.c">
+      <Filter>noise_process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\fft.c">
+      <Filter>stft</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file_test\file_test.c">
+      <Filter>file_test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\main.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\common\common_type.h">
+      <Filter>common</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\wav\wave_file.h">
-      <Filter>头文件</Filter>
+      <Filter>wave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\linear_3Mic_manage\linear_3Mic_manage.h">
+      <Filter>linear_3Mic_manage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stft\stft.h">
+      <Filter>stft</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\noise_process\ns_exter.h">
+      <Filter>noise_process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\noise_process\ns_inter.h">
+      <Filter>noise_process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stft\fft.h">
+      <Filter>stft</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file_test\file_test.h">
+      <Filter>file_test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
