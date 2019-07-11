@@ -1,0 +1,1 @@
+../test_in/x1_s22n86_s05n01.wav   ../test_in/x2_s22n86_s05n01.wav   ../test_in/x3_s22n86_s05n01.wav  ../test_out/speechTest_48k_out.wav
