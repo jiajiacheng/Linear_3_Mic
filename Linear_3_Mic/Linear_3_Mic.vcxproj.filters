@@ -21,12 +21,54 @@
     <ClCompile Include="..\src\wav\wave_file.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\common\common_type.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\linear_3Mic_manage\linear_3Mic_manage.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\noise_estimate.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\noise_suppression.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\noise_process\ns_init.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\fft.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\sqrt_hamming.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stft\stft.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\main.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\src\wav\wave_file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\common_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\linear_3Mic_manage\linear_3Mic_manage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\noise_process\ns_exter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\noise_process\ns_inter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stft\fft.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stft\stft.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

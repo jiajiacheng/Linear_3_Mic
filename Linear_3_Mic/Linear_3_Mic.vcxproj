@@ -11,11 +11,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\common\common_type.c" />
+    <ClCompile Include="..\src\linear_3Mic_manage\linear_3Mic_manage.c" />
     <ClCompile Include="..\src\main.c" />
+    <ClCompile Include="..\src\noise_process\noise_estimate.c" />
+    <ClCompile Include="..\src\noise_process\noise_suppression.c" />
+    <ClCompile Include="..\src\noise_process\ns_init.c" />
+    <ClCompile Include="..\src\stft\fft.c" />
+    <ClCompile Include="..\src\stft\sqrt_hamming.c" />
+    <ClCompile Include="..\src\stft\stft.c" />
     <ClCompile Include="..\src\wav\wave_file.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\common\common_type.h" />
+    <ClInclude Include="..\src\linear_3Mic_manage\linear_3Mic_manage.h" />
     <ClInclude Include="..\src\main.h" />
+    <ClInclude Include="..\src\noise_process\ns_exter.h" />
+    <ClInclude Include="..\src\noise_process\ns_inter.h" />
+    <ClInclude Include="..\src\stft\fft.h" />
+    <ClInclude Include="..\src\stft\stft.h" />
     <ClInclude Include="..\src\wav\wave_file.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -52,7 +66,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\src;..\src\wav;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\src\wav;..\src\stft;..\src\noise_process;..\src\linear_3Mic_manage;..\src\common</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
