@@ -6,6 +6,9 @@ L3M_ERROR_TYPE L3m_Mic_Array_Init(MIC_ARRAY* p_mic_array)
 {
 	p_mic_array->fs = SAMPLATE_48K; // mic_array includes the information of mic array and the input signals
 	p_mic_array->mic_distance = 0.1; // the distance between center mic and right mic
+	p_mic_array->xr_index = 0;
+	p_mic_array->xc_index = 0;
+	p_mic_array->xl_index = 0;
 	p_mic_array->xR_block = (FLOAT_T*)calloc(STFT_DATBLKLEN, sizeof(FLOAT_T));
 	p_mic_array->xC_block = (FLOAT_T*)calloc(STFT_DATBLKLEN, sizeof(FLOAT_T));
 	p_mic_array->xL_block = (FLOAT_T*)calloc(STFT_DATBLKLEN, sizeof(FLOAT_T));
@@ -32,11 +35,12 @@ L3M_ERROR_TYPE L3m_Ns_Init(NS_PARA* p_ns_para, NS_VAR* p_ns_var)
 {
 	p_ns_para->epsilon1 = 0.6;
 	p_ns_para->epsilon2 = 0.1;
-	p_ns_var->xR_buff = (FLOAT_T*)calloc(STFT_DATBLKLEN*2 , sizeof(FLOAT_T));
-	p_ns_var->xC_buff = (FLOAT_T*)calloc(STFT_DATBLKLEN * 2, sizeof(FLOAT_T));
-	p_ns_var->xL_buff = (FLOAT_T*)calloc(STFT_DATBLKLEN * 2, sizeof(FLOAT_T));
-	p_ns_var->noise_spec = (FLOAT_T*)calloc(STFT_KBIN , sizeof(FLOAT_T));
-	//p_ns_var->X_supp = (FLOAT_T*)calloc(STFT_KBIN, sizeof(FLOAT_T));
+
+	p_ns_var->xR_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
+	p_ns_var->xC_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
+	p_ns_var->xL_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
+	p_ns_var->noise_spec = (complexDouble*)calloc(STFT_KBIN , sizeof(complexDouble));
+	p_ns_var->X_supp = (FLOAT_T*)calloc(STFT_KBIN, sizeof(FLOAT_T));
 	//p_ns_var->x_supp = (FLOAT_T*)calloc(STFT_DATBLKLEN, sizeof(FLOAT_T));
 	if ((NULL == p_ns_var->xR_buff) ||
 		(NULL == p_ns_var->xC_buff)||

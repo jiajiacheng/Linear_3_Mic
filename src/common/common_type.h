@@ -16,6 +16,8 @@
 #endif
 #define TDOA_TAU_S 13
 #define TDOA_TAU_N 1
+//const
+#define M_PI       3.14159265358979323846
 
 #define max(a,b)    (((a) > (b)) ? (a) : (b))
 #define min(a,b)    (((a) < (b)) ? (a) : (b))
@@ -132,7 +134,7 @@ typedef enum{
 //complexDouble complexMulConj(complexDouble X1,complexDouble X2);
 //float complexAbsSqr(complexDouble X1);
 //complexDouble complexSub(complexDouble X1,complexDouble X2);
-//complexDouble Real_complexMul(float X1,complexDouble X2);
+complexDouble Real_complexMul(float X1,complexDouble X2);
 
 
 

@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include"linear_3Mic_manage.h"
+#include<math.h>
 
 L3M_ERROR_TYPE  NS_process_Init(LINEAR_3MIC_MANAGE * pManage)
 {
@@ -37,20 +38,25 @@ L3M_ERROR_TYPE  NS_process_fun(S16_T *Xr, S16_T *Xc, S16_T* Xl, S16_T* output, L
 	for (index = 0; index < STFT_DATBLKLEN; index++)
 	{
 		
+		p_Manage->m_mic_array.xR_block[index] = (FLOAT_T)(Xr[index] / div);
 		p_Manage->m_mic_array.xC_block[index] = (FLOAT_T)(Xc[index] / div);
-		
+		p_Manage->m_mic_array.xL_block[index] = (FLOAT_T)(Xl [index] / div);
+
 	}
 #endif
 
 	//////////////////////////////////////////////////////
 	DFTanalysis_fun_2((p_Manage->m_mic_array.xC_block), (p_Manage->m_mic_array.XC), &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
 	
-	//noise_estimate_fun
-	//noise_supp_fun
+	//L3M_ERROR_TYPE noise_supp_fun(MIC_ARRAY * p_mic_array, STFT_PARA * p_stft_para,NS_VAR* p_ns_var, GAIN_PARA* p_gain_para, GAIN_VAR* p_gain_var)
+	
+
+	noise_estimate_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_tdoa_var), &(p_Manage->m_ns_para), &(p_Manage->m_ns_var));
+	noise_supp_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para),  &(p_Manage->m_ns_var),&(p_Manage->m_gain_para),&(p_Manage->m_gain_var));
 #ifdef DEBUG_ON
 	File_Test(fp_dft, p_Manage->m_mic_array.XC, STFT_DATBLKLEN);
 #endif
-	DFTsynthesis_fun_2((p_Manage->m_mic_array.XC), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
+	DFTsynthesis_fun_2((p_Manage->m_ns_var.X_supp), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
 	
 	
 	
@@ -83,6 +89,7 @@ S16_T FLOAT_to_U16_T(FLOAT_T* inputbuf, S16_T * outputbuf, S16_T M)
 			if (inputbuf[i] <= 32767)
 			{
 				outputbuf[i] = (S16_T)(inputbuf[i] + 0.5);
+				//outputbuf[i] = (S16_T)(inputbuf[i]+1);
 			}
 			else
 			{

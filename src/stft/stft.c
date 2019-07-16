@@ -1,6 +1,8 @@
 #include<stdlib.h>
+#include<string.h>
 #include"stft.h"
 #include"fft.h"
+
 L3M_ERROR_TYPE L3m_Stft_Init(STFT_PARA* p_stft_para, STFT_VAR* p_stft_var)
 {
 
@@ -33,26 +35,12 @@ L3M_ERROR_TYPE DFTanalysis_fun_2(FLOAT_T * p16I_time, FLOAT_T* pfO_Freq, STFT_PA
 	S16_T i,i_ch,idx=0,num_channel = 1;
 	
 	pWin = p_stft_para->Win;
-	for (i_ch = 0; i_ch < 1; i_ch++)
+	for (i_ch = 0; i_ch < num_channel; i_ch++)
 	{
-		//循环buffer算法
-		/*
-		S16_T* p_idx;
-		for (i = 0; i < M;i++)
-		{
-			idx = idx % 1;
-			p_stft_var->analysisBuf[idx*M+i] = p16I_time[i];//new data in
-		}
-		for (i = 0; i < N; i++)
-		{
-			temp[i] = p_stft_var->analysisBuf[((idx % 1)*M + i) % N] * pWin[i];//strat from old data 
-		}*/
-		//传统算法
-		for (i = 0; i<(N - M); i++)
-		{
-			p_stft_var->analysisBuf[i] = p_stft_var->analysisBuf[i + M];
-			p_stft_var->analysisBuf[i + M] = p16I_time[i];
-		}
+
+		memcpy(&(p_stft_var->analysisBuf[0]), &(p_stft_var->analysisBuf[M]), sizeof(FLOAT_T)*M);
+		memcpy(&(p_stft_var->analysisBuf[M]), &(p16I_time[0]), sizeof(FLOAT_T)*M);
+
 		for (i = 0; i<(N - M); i++)
 		{
 			temp[i] = p_stft_var->analysisBuf[i] * (*pWin++);
@@ -100,17 +88,10 @@ L3M_ERROR_TYPE DFTsynthesis_fun_2(FLOAT_T* pfI_Freq, FLOAT_T * pfO_time, STFT_PA
 		p_stft_var->synthesisBuf[i] = p_stft_var->synthesisBuf[i] + temp[i];
 	}
 
-	for (i = 0; i<M; i++)
-	{
-		pfO_time[i] = p_stft_var->synthesisBuf[i];
-	}
+	memcpy(&(pfO_time[0]), &(p_stft_var->synthesisBuf[0]), sizeof(FLOAT_T)*M);
+	memcpy(&(p_stft_var->synthesisBuf[0]), &(p_stft_var->synthesisBuf[M]), sizeof(FLOAT_T)*M);
+	memset(&(p_stft_var->synthesisBuf[M]), 0 ,sizeof(FLOAT_T)*M);
 
-	//Update synthesis buffer//
-	for (i = 0; i<(N - M); i++)
-	{
-		p_stft_var->synthesisBuf[i] = p_stft_var->synthesisBuf[i + M];
-		p_stft_var->synthesisBuf[i + M] = 0;
-	}
 	return L3M_ERROR_NONE;
 }
 void L3m_Stft_Destory(STFT_VAR* p_stft_var)
