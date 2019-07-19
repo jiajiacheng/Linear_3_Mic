@@ -57,9 +57,9 @@ L3M_ERROR_TYPE L3m_Mic_Array_Init(MIC_ARRAY* p_mic_array);
 L3M_ERROR_TYPE L3m_Tdoa_Init(TDOA_VAR* p_tdoa_var);
 L3M_ERROR_TYPE L3m_Ns_Init(NS_PARA* p_ns_para, NS_VAR* p_ns_var);
 L3M_ERROR_TYPE L3m_Gain_Init(GAIN_PARA* p_gain_para, GAIN_VAR* p_gain_var);
-void L3m_Noise_process_Destory(MIC_ARRAY* p_mic_array,	NS_VAR* p_ns_var,	GAIN_VAR* p_gain_var);
+void L3m_Noise_process_Destory(MIC_ARRAY* p_mic_array, NS_VAR* p_ns_var, GAIN_VAR* p_gain_var);
 
-L3M_ERROR_TYPE gcr_fun(NS_VAR* p_ns_var, TDOA_VAR* p_tdoa_var, FLOAT_T* gcr,FLOAT_T* sigC1, FLOAT_T* sigC2, FLOAT_T* sigR1, FLOAT_T* sigR2);
-L3M_ERROR_TYPE glr_fun(NS_VAR* p_ns_var, TDOA_VAR* p_tdoa_var, FLOAT_T* glr,FLOAT_T* sigL1, FLOAT_T* sigL2, FLOAT_T* sigR1, FLOAT_T* sigR2);
+L3M_ERROR_TYPE gcr_fun(NS_VAR* p_ns_var, TDOA_VAR* p_tdoa_var, FLOAT_T* gcr, FLOAT_T* sigC1, FLOAT_T* sigC2, FLOAT_T* sigR1, FLOAT_T* sigR2);
+L3M_ERROR_TYPE glr_fun(NS_VAR* p_ns_var, TDOA_VAR* p_tdoa_var, FLOAT_T* glr, FLOAT_T* sigL1, FLOAT_T* sigL2, FLOAT_T* sigR1, FLOAT_T* sigR2);
 L3M_ERROR_TYPE shift_sig_fun(FLOAT_T* x, S16_T tau, FLOAT_T* x_shift, S16_T len);
 #endif

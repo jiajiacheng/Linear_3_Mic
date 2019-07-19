@@ -16,7 +16,7 @@ L3M_ERROR_TYPE L3m_Mic_Array_Init(MIC_ARRAY* p_mic_array)
 
 	if ((NULL == p_mic_array->xR_block) ||
 		(NULL == p_mic_array->xC_block) ||
-		(NULL == p_mic_array->xL_block)||
+		(NULL == p_mic_array->xL_block) ||
 		(NULL == p_mic_array->XC))
 	{
 		return L3M_MALLOC_ERR;
@@ -28,7 +28,7 @@ L3M_ERROR_TYPE L3m_Tdoa_Init(TDOA_VAR* p_tdoa_var)
 	p_tdoa_var->tau_s = 13;
 	p_tdoa_var->tau_n = 1;
 	p_tdoa_var->tau1 = p_tdoa_var->tau_n - p_tdoa_var->tau_s;
-	p_tdoa_var->tau2 = p_tdoa_var->tau1>>1;
+	p_tdoa_var->tau2 = p_tdoa_var->tau1 >> 1;
 	return L3M_ERROR_NONE;
 }
 L3M_ERROR_TYPE L3m_Ns_Init(NS_PARA* p_ns_para, NS_VAR* p_ns_var)
@@ -39,13 +39,13 @@ L3M_ERROR_TYPE L3m_Ns_Init(NS_PARA* p_ns_para, NS_VAR* p_ns_var)
 	p_ns_var->xR_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
 	p_ns_var->xC_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
 	p_ns_var->xL_buff = (FLOAT_T*)calloc(STFT_WINLEN, sizeof(FLOAT_T));
-	p_ns_var->noise_spec = (complexDouble*)calloc(STFT_KBIN , sizeof(complexDouble));
+	p_ns_var->noise_spec = (complexDouble*)calloc(STFT_KBIN, sizeof(complexDouble));
 	p_ns_var->X_supp = (FLOAT_T*)calloc(STFT_KBIN, sizeof(FLOAT_T));
 	//p_ns_var->x_supp = (FLOAT_T*)calloc(STFT_DATBLKLEN, sizeof(FLOAT_T));
 	if ((NULL == p_ns_var->xR_buff) ||
-		(NULL == p_ns_var->xC_buff)||
+		(NULL == p_ns_var->xC_buff) ||
 		(NULL == p_ns_var->xL_buff) ||
-		(NULL == p_ns_var->noise_spec) 
+		(NULL == p_ns_var->noise_spec)
 		)
 	{
 		return L3M_MALLOC_ERR;
@@ -59,7 +59,7 @@ L3M_ERROR_TYPE L3m_Gain_Init(GAIN_PARA* p_gain_para, GAIN_VAR* p_gain_var)
 	p_gain_para->minGain = 0.05;
 	p_gain_var->Gain = (FLOAT_T*)calloc(STFT_KBIN, sizeof(FLOAT_T));
 	p_gain_var->postSNR = (FLOAT_T*)calloc(STFT_KBIN, sizeof(FLOAT_T));
-	if ((NULL == p_gain_var->Gain)||
+	if ((NULL == p_gain_var->Gain) ||
 		(NULL == p_gain_var->postSNR)
 		)
 	{

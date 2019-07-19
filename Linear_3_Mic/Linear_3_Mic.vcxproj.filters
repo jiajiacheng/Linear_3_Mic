@@ -45,6 +45,9 @@
     <ClCompile Include="..\src\stft\stft.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\file.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\main.h">
@@ -69,6 +72,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\src\stft\stft.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

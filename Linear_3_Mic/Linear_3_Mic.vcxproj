@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\common\common_type.c" />
+    <ClCompile Include="..\src\file.c" />
     <ClCompile Include="..\src\linear_3Mic_manage\linear_3Mic_manage.c" />
     <ClCompile Include="..\src\main.c" />
     <ClCompile Include="..\src\noise_process\noise_estimate.c" />
@@ -24,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\common\common_type.h" />
+    <ClInclude Include="..\src\file.h" />
     <ClInclude Include="..\src\linear_3Mic_manage\linear_3Mic_manage.h" />
     <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\noise_process\ns_exter.h" />

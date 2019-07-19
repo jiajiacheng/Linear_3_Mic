@@ -2,13 +2,20 @@
 #define  COMMON_TYPES_H
 
 
+
+//for debug
+#define DEBUG_ON
+
+#define FILENAME_LEN_MAX     100
+
+//path defination
+//#define   INPUT_PATH       "d:\\das_test\\test_input\\"
+//#define   OUTPUT_PATH      "d:\\das_test\\test_output\\vc_"
+#define   DEBUG_PATH       "../test_out/"
+//#define   INFOR_PATH       "d:\\das_test\\test_infor\\test_infor.txt"
+//for different samplate select 
 #define SAMPLATE_48K 48000
 #define WAV_INPUT
-//#define DEBUG_ON
-
-
-
-
 #ifdef SAMPLATE_48K
 #define STFT_WINLEN  256 //[window length,using turkey window]
 #define STFT_DATBLKLEN STFT_WINLEN>>1  //[frame shift: max support 16k  20ms frame length]
@@ -16,8 +23,7 @@
 #endif
 #define TDOA_TAU_S 13
 #define TDOA_TAU_N 1
-//const
-#define M_PI       3.14159265358979323846
+#define M_PI   3.14159265358979323846
 
 #define max(a,b)    (((a) > (b)) ? (a) : (b))
 #define min(a,b)    (((a) < (b)) ? (a) : (b))

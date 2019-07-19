@@ -1,7 +1,10 @@
 #include<stdlib.h>
 #include"linear_3Mic_manage.h"
 #include<math.h>
-
+#ifdef DEBUG_ON
+#include "file.h"
+//extern FILE *fp_gcr;
+#endif
 L3M_ERROR_TYPE  NS_process_Init(LINEAR_3MIC_MANAGE * pManage)
 {
 	//初始化各模块
@@ -14,10 +17,13 @@ L3M_ERROR_TYPE  NS_process_Init(LINEAR_3MIC_MANAGE * pManage)
 	ERROR_CHECK(val);
 	val = L3m_Ns_Init(&(pManage->m_ns_para), &(pManage->m_ns_var));
 	ERROR_CHECK(val);
-	val = L3m_Gain_Init(&(pManage->m_gain_para),&(pManage->m_gain_var));
+	val = L3m_Gain_Init(&(pManage->m_gain_para), &(pManage->m_gain_var));
 	ERROR_CHECK(val);
-	
-	//if (NULL ==( fp_dft = fopen("../test_out/dft.dat", "wb"))){ return L3M_DAT_ERR; }
+#ifdef DEBUG_ON
+	File_open("dft", &fp_dft);
+	File_open("gcr",&fp_gcr);
+	File_open("glr", &fp_glr);
+#endif
 	return L3M_ERROR_NONE;
 }
 
@@ -33,49 +39,52 @@ L3M_ERROR_TYPE  NS_process_fun(S16_T *Xr, S16_T *Xc, S16_T* Xl, S16_T* output, L
 	}
 	/*else
 	{
-		div = 1.0;
+	div = 1.0;
 	}*/
 	for (index = 0; index < STFT_DATBLKLEN; index++)
 	{
-		
+
 		p_Manage->m_mic_array.xR_block[index] = (FLOAT_T)(Xr[index] / div);
 		p_Manage->m_mic_array.xC_block[index] = (FLOAT_T)(Xc[index] / div);
-		p_Manage->m_mic_array.xL_block[index] = (FLOAT_T)(Xl [index] / div);
+		p_Manage->m_mic_array.xL_block[index] = (FLOAT_T)(Xl[index] / div);
 
 	}
 #endif
 
 	//////////////////////////////////////////////////////
 	DFTanalysis_fun_2((p_Manage->m_mic_array.xC_block), (p_Manage->m_mic_array.XC), &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
-	
-	//L3M_ERROR_TYPE noise_supp_fun(MIC_ARRAY * p_mic_array, STFT_PARA * p_stft_para,NS_VAR* p_ns_var, GAIN_PARA* p_gain_para, GAIN_VAR* p_gain_var)
-	
 
-	noise_estimate_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_tdoa_var), &(p_Manage->m_ns_para), &(p_Manage->m_ns_var));
-	noise_supp_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para),  &(p_Manage->m_ns_var),&(p_Manage->m_gain_para),&(p_Manage->m_gain_var));
+
+
 #ifdef DEBUG_ON
+	
 	File_Test(fp_dft, p_Manage->m_mic_array.XC, STFT_DATBLKLEN);
 #endif
-	DFTsynthesis_fun_2((p_Manage->m_ns_var.X_supp), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
-	
-	
-	
+	//noise_estimate_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_tdoa_var), &(p_Manage->m_ns_para), &(p_Manage->m_ns_var));
+	//noise_supp_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_ns_var), &(p_Manage->m_gain_para), &(p_Manage->m_gain_var));
+
+//	DFTsynthesis_fun_2((p_Manage->m_ns_var.X_supp), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
+	DFTsynthesis_fun_2((p_Manage->m_mic_array.XC), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
+
+
+
 	for (index = 0; index < STFT_DATBLKLEN; index++)
 	{
 		fl_output[index] = (FLOAT_T)(fl_output[index] * div);
 	}
 
 	//#ifdef DEBUG_ON
-//	File_Test(fp_dft, fl_output, STFT_DATBLKLEN);
-//#endif
+	//	File_Test(fp_dft, fl_output, STFT_DATBLKLEN);
+	//#endif
 	FLOAT_to_U16_T(fl_output, output, (STFT_DATBLKLEN));
 	/*for (index = 0; index < STFT_DATBLKLEN; index++)
-		output[index] = (S16_T)fl_output[index];
+	output[index] = (S16_T)fl_output[index];
 	*/
 	return L3M_ERROR_NONE;
 }
 void L3M_MANAGE_DESTORY(LINEAR_3MIC_MANAGE* p_Manage)
 {
+	
 	L3m_Stft_Destory(&(p_Manage->m_stft_var));
 	L3m_Noise_process_Destory(&(p_Manage->m_mic_array), &(p_Manage->m_ns_var), &(p_Manage->m_gain_var));
 }
