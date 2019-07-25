@@ -6,7 +6,9 @@
 #include "common_type.h"
 #include "linear_3Mic_manage.h"
 #include "wave_file.h"  
-
+#ifdef DEBUG_ON
+#include "file.h"
+#endif
 
 int main(int argc, char* argv[])
 {      
@@ -64,6 +66,14 @@ int main(int argc, char* argv[])
 	ckSize1 = min(ckSize1, ckSize3);
 	val_len1 = NS_process_Init(p_Manage);
 	bufferlen = STFT_DATBLKLEN;
+	if (fp_out != 0)
+	{
+		char wav_header[WV_LHMIN];
+		if (1 != fwrite(wav_header, WV_LHMIN, 1, fp_out))
+		{
+			goto L3M_MAINLOOP_EXIT_PATH;
+		}
+	}
 	for (i = 0; i <(ckSize1 / bufferlen); i++)
 	{
 		if ((fread(xR_block, sizeof(S16_T), bufferlen, fp_r) == bufferlen) &&
@@ -73,6 +83,9 @@ int main(int argc, char* argv[])
 			NS_process_fun(xR_block, xC_block, xL_block, x_supp, p_Manage);
 			fwrite(x_supp, sizeof(S16_T), bufferlen, fp_out);
 			printf("frame Number is %d\r", (i+1));
+		//	j
+
+
 			
 		}
 	}
@@ -82,18 +95,23 @@ int main(int argc, char* argv[])
 
 L3M_MAINLOOP_EXIT_PATH:
 
-	if (fp_r != NULL) fclose(fp_r);
-	if (fp_c != NULL) fclose(fp_c);
-	if (fp_l != NULL) fclose(fp_l);
+
 	if (fp_out)
 	{
 		file_len = FLfileSize(fp_out);
 		fseek(fp_out, 0, SEEK_SET);
-		WVWritehead(fp_out, 1, samplerate1, file_len - WV_LHMIN);
+		WVWritehead(fp_out, 1, samplerate1, file_len-WV_LHMIN);//
 		fclose(fp_out);
 	}
-	
+	if (fp_r != NULL) fclose(fp_r);
+	if (fp_c != NULL) fclose(fp_c);
+	if (fp_l != NULL) fclose(fp_l);
+#ifdef DEBUG_ON
 
+	File_close(fp_dft);
+	File_close(fp_glr);
+	File_close(fp_gcr);
+#endif
 	
 
 

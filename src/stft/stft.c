@@ -70,18 +70,23 @@ L3M_ERROR_TYPE DFTsynthesis_fun_2(FLOAT_T* pfI_Freq, FLOAT_T * pfO_time, STFT_PA
 	iRealFFT(pfI_Freq, &p_stft_var->ifft_output[0], N);
 
 	//windowing//
+	//pWin = p_stft_para->Win;
+	//for (i = 0; i<(N - M); i++)
+	//{
+	//	temp[i] = p_stft_var->ifft_output[i] * (*pWin++);
+	//}
+
+	//pWin = &(p_stft_para->Win[M - 1]);//points to the last point of the window
+	//for (i = 0; i<(N - M); i++)
+	//{
+	//	temp[i + M] = p_stft_var->ifft_output[i + M] * (*pWin--);
+	//}
+
 	pWin = p_stft_para->Win;
-	for (i = 0; i<(N - M); i++)
+	for (i = 0; i<N; i++)
 	{
 		temp[i] = p_stft_var->ifft_output[i] * (*pWin++);
 	}
-
-	pWin = &(p_stft_para->Win[M - 1]);//points to the last point of the window
-	for (i = 0; i<(N - M); i++)
-	{
-		temp[i + M] = p_stft_var->ifft_output[i + M] * (*pWin--);
-	}
-
 	//Overlap-add and shift synthesis buffer//
 	for (i = 0; i<N; i++)
 	{

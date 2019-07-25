@@ -58,10 +58,10 @@ L3M_ERROR_TYPE  NS_process_fun(S16_T *Xr, S16_T *Xc, S16_T* Xl, S16_T* output, L
 
 #ifdef DEBUG_ON
 	
-	File_Test(fp_dft, p_Manage->m_mic_array.XC, STFT_DATBLKLEN);
+	File_Test(fp_dft, p_Manage->m_mic_array.XC, STFT_WINLEN);
 #endif
 	//noise_estimate_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_tdoa_var), &(p_Manage->m_ns_para), &(p_Manage->m_ns_var));
-	//noise_supp_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_ns_var), &(p_Manage->m_gain_para), &(p_Manage->m_gain_var));
+//	noise_supp_fun(&(p_Manage->m_mic_array), &(p_Manage->m_stft_para), &(p_Manage->m_ns_var), &(p_Manage->m_gain_para), &(p_Manage->m_gain_var));
 
 //	DFTsynthesis_fun_2((p_Manage->m_ns_var.X_supp), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));
 	DFTsynthesis_fun_2((p_Manage->m_mic_array.XC), fl_output, &(p_Manage->m_stft_para), &(p_Manage->m_stft_var));

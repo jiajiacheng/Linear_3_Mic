@@ -41,7 +41,7 @@ void File_Test(FILE* fp, FLOAT_T * p_TestData, int len)
 	S16_T err,m;
 	for (m = 0; m<len; m++)
 	{
-		fprintf(fp, "%.16f,\n", *(p_TestData++));
+		fprintf(fp, "%.16f\n", *(p_TestData++));
 	}
 }
 void File_Complex_Test(FILE* fp, complexDouble * p_TestData, int len)
@@ -49,15 +49,15 @@ void File_Complex_Test(FILE* fp, complexDouble * p_TestData, int len)
 	FILE  *fp_dat = NULL;
 
 	S16_T err, m;
-	fprintf(fp, "%.16f,\n", (p_TestData[0].real));
-	fprintf(fp, "%.16f,\n", 0);
+	fprintf(fp, "%.16f\n", (p_TestData[0].real));
+	fprintf(fp, "%.16f\n", 0);
 	for (m = 1; m<len; m++)
 	{
-		fprintf(fp, "%.16f,\n", (p_TestData[m].real));
-		fprintf(fp, "%.16f,\n", (p_TestData[m].imag));
+		fprintf(fp, "%.16f\n", (p_TestData[m].real));
+		fprintf(fp, "%.16f\n", (p_TestData[m].imag));
 	}
-	fprintf(fp, "%.16f,\n", (p_TestData[len].real));
-	fprintf(fp, "%.16f,\n", 0);
+	fprintf(fp, "%.16f\n", (p_TestData[len].real));
+	fprintf(fp, "%.16f\n", 0);
 }
 void File_close(FILE* fp)
 {
